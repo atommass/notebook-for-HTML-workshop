@@ -33,9 +33,45 @@
                     I agree to the <a href="/privacy-policy" target="_blank">Privacy Policy</a> and consent to data processing in accordance with GDPR.
             </label>
             <br /><br />
-            <button type="submit">Submit</button>
+            <button type="submit" onclick="getCurrentPosition()">Submit</button>
         </form>
-        
-        <script src="" async defer></script>
+
+        <br /><br />
+
+    <!-- YouTube iframe -->
+        <div id="video-container" style="cursor:pointer; display:inline-block;">
+            <iframe id="youtube-video" width="560" height="315" 
+                src="https://www.youtube.com/embed/azuE1sVKjRk?si=SUImWl2TKlXb2Te0" 
+                title="Workshop" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div id="coordinates" style="margin-top:10px; font-weight:bold;"></div>
+
+        <div id="coordinates" style="margin-top:10px; font-weight:bold;"></div>
+
+        <script>
+        const form = document.getElementById('workshop-form');
+        const coordinatesDiv = document.getElementById('coordinates');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent actual submission
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const lat = position.coords.latitude.toFixed(6);
+                    const lon = position.coords.longitude.toFixed(6);
+                    coordinatesDiv.textContent = `Current Location: Latitude ${lat}, Longitude ${lon}`;
+                }, error => {
+                    coordinatesDiv.textContent = `Error getting location: ${error.message}`;
+                });
+            } else {
+                coordinatesDiv.textContent = 'Geolocation is not supported by your browser.';
+            }
+        });
+    </script>
     </body>
 </html>
