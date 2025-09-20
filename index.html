@@ -10,11 +10,28 @@
     </head>
     <body>
         <form action="https://example.com/api/submit" method="POST">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="John" required />
+            <label for="name" >Name:</label>
+            <input type="text" id="name" name="name" placeholder="John" required />
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" placeholder="Doe" required >
             <br /><br />
             <label for="age">Age:</label>
             <input type="number" id="age" name="age" value="30" required min="0" />
+            <br /><br />
+            <fieldset>
+                <legend>Please select your favorite programming language:</legend>
+                    <input type="radio" id="html" name="fav_language" value="HTML" />
+                    <label for="html">HTML</label><br />
+                    <input type="radio" id="css" name="fav_language" value="CSS" />
+                    <label for="css">CSS</label><br />
+                    <input type="radio" id="javascript" name="fav_language" value="JavaScript" />
+                    <label for="javascript">JavaScript</label><br />
+            </fieldset>
+            <br /><br />
+            <label>
+                <input type="checkbox" name="gdpr_consent" value="yes" required />
+                    I agree to the <a href="/privacy-policy" target="_blank">Privacy Policy</a> and consent to data processing in accordance with GDPR.
+            </label>
             <br /><br />
             <button type="submit">Submit</button>
         </form>
