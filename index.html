@@ -33,12 +33,16 @@
                     I agree to the <a href="/privacy-policy" target="_blank">Privacy Policy</a> and consent to data processing in accordance with GDPR.
             </label>
             <br /><br />
-            <button type="submit" onclick="getCurrentPosition()">Submit</button>
+            <button type="submit">Submit</button>
+            
         </form>
 
         <br /><br />
-
-    <!-- YouTube iframe -->
+        <div>
+            <button type="getLocation" onclick="getCurrentLocation()">Get Location</button>
+            <p id="demo"></p>
+        </div>
+        <br /><br />
         <div id="video-container" style="cursor:pointer; display:inline-block;">
             <iframe id="youtube-video" width="560" height="315" 
                 src="https://www.youtube.com/embed/azuE1sVKjRk?si=SUImWl2TKlXb2Te0" 
@@ -48,30 +52,25 @@
                 allowfullscreen>
             </iframe>
         </div>
-
-        <div id="coordinates" style="margin-top:10px; font-weight:bold;"></div>
-
-        <div id="coordinates" style="margin-top:10px; font-weight:bold;"></div>
-
         <script>
-        const form = document.getElementById('workshop-form');
-        const coordinatesDiv = document.getElementById('coordinates');
+            const x = document.getElementById("demo");
 
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent actual submission
-
+            function getCurrentLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(position => {
-                    const lat = position.coords.latitude.toFixed(6);
-                    const lon = position.coords.longitude.toFixed(6);
-                    coordinatesDiv.textContent = `Current Location: Latitude ${lat}, Longitude ${lon}`;
-                }, error => {
-                    coordinatesDiv.textContent = `Error getting location: ${error.message}`;
-                });
-            } else {
-                coordinatesDiv.textContent = 'Geolocation is not supported by your browser.';
+                navigator.geolocation.getCurrentPosition(success, error);
+            } else { 
+                x.innerHTML = "Geolocation is not supported by this browser.";
             }
-        });
-    </script>
+        }
+
+        function success(position) {
+            x.innerHTML = "Latitude: " + position.coords.latitude.toFixed(6) + 
+                "<br>Longitude: " + position.coords.longitude.toFixed(6);
+        }
+
+        function error() {
+            alert("Location not available.");
+        }
+        </script>
     </body>
 </html>
