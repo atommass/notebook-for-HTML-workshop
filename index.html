@@ -10,11 +10,14 @@
     </head>
     <body>
         <form action="https://example.com/api/submit" method="POST">
-          <input type="text" name="name" value="John" />
-          <input type="text" name="age" value="30" />
-          <button type="submit">Submit</button>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="John" required />
+            <br /><br />
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" value="30" required min="0" />
+            <br /><br />
+            <button type="submit">Submit</button>
         </form>
-
         
         <script src="" async defer></script>
     </body>
